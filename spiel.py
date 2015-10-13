@@ -9,9 +9,7 @@ class spiel:
         erzeugteZiele = []
 
         for i in range(anzahl):
-            ziel = zielObjekt.zielObjekt()
-            ziel.x = 600
-            ziel.y = random.randint(minY, maxY)
+            ziel = zielObjekt.erzeugeZiel(600,600,minY,maxY)
             erzeugteZiele.append(ziel)
         
         self.ziele += erzeugteZiele
@@ -36,17 +34,16 @@ class spiel:
 
         self.spielfigur.y = self.maushoehe
 
-        if(random.randint(0,100) > 90):
-            self.erzeugeZiele(random.randint(1,5),0,300)
+        if(random.randint(0,100) > 95):
+            self.erzeugeZiele(random.randint(1,4),0,300)
 
         for ziel in self.ziele:
             ziel.bewegeDich(4)
            
-            if(ziel.x <= self.spielfigur.x + 40):
+            if(ziel.x <= self.spielfigur.x + self.spielfigur.hoehe):
                 if((ziel.y + ziel.groesse >= self.spielfigur.y) and 
                         (ziel.y <= self.spielfigur.y + self.spielfigur.hoehe)):
                     ziel.valide = False
-                    print("HIT")
 
             if(not ziel.valide):
                 self.spielfeld.delete(ziel.zeichnung)
@@ -76,7 +73,7 @@ class spiel:
         self.spielfeld.pack()
 
         #Initalisiere die Spielfigur
-        self.spielfigur = spieler.spieler()
+        self.spielfigur = spieler.spieler(breite=30, hoehe=20)
         self.maushoehe = self.spielfigur.y
 
         #Lege Eventhandeling für Tasten fest

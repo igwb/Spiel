@@ -9,10 +9,11 @@ class spiel:
 
         for i in range(anzahl):
             ziel = zielObjekt.zielObjekt()
-            ziel.x = 300
+            ziel.x = 600
             ziel.y = random.randint(minY, maxY)
             erzeugteZiele.append(ziel)
-        return erzeugteZiele
+        
+        self.ziele += erzeugteZiele
 
     def start(self):
         self.hauptschleife()
@@ -29,6 +30,10 @@ class spiel:
             ziel.zeichne(self.spielfeld)
 
     def aktualisiere(self):
+
+        if(random.randint(0,100) > 99):
+            self.erzeugeZiele(random.randint(1,5),0,300)
+
         for ziel in self.ziele:
             ziel.bewegeDich(1)
             if(not ziel.valide):
@@ -47,13 +52,14 @@ class spiel:
         #Erstelle das Spielfeld und lege seine Größe fest.
         self.spielfeld = tkinter.Canvas(width=600,height=300)
 
-        #Zeichne den Spielfeldhintergrund
+        Zeichne den Spielfeldhintergrund
         self.spielfeld.create_rectangle(0, 0, 600, 300,
                                          fill="#000",outline="")
+        
         self.spielfeld.pack()
 
         #Starte das Spiel
-        self.ziele = self.erzeugeZiele(3, 0, 300)
+        self.ziele = []
 
         self.start()
 

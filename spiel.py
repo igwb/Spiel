@@ -2,6 +2,7 @@ import tkinter
 import zielObjekt
 import random
 import spieler
+import time
 
 class spiel:
 
@@ -15,14 +16,29 @@ class spiel:
         self.ziele += erzeugteZiele
 
     def start(self):
+        self.letzte_hauptschleife = time.time()
         self.hauptschleife()
         self.spielfenster.mainloop()
 
     def hauptschleife(self):
+
         self.aktualisiere()
         self.zeichne()
 
-        self.spielfenster.after(10, self.hauptschleife)
+        jetzt = time.time()
+        verstrichene_zeit = jetzt - self.letzte_hauptschleife
+        self.letzte_hauptschleife = jetzt
+
+        optimale_verstrichene_zeit = 1./self.gewuenschteFPS
+
+        schlafenszeit = int((optimale_verstrichene_zeit - verstrichene_zeit) 
+                            * 1000)
+
+        if(schlafenszeit > 0):
+            self.spielfenster.after(schlafenszeit, self.hauptschleife)
+        else:
+            print(str(schlafenszeit * -1) + "ms zu langsam!")
+            self.spielfenster.after(10, self.hauptschleife)
 
     def zeichne(self):
         for ziel in self.ziele:
@@ -35,7 +51,7 @@ class spiel:
         self.spielfigur.y = self.maushoehe
 
         if(random.randint(0,100) > 95):
-            self.erzeugeZiele(random.randint(1,4),0,300)
+            self.erzeugeZiele(random.randint(1,43),0,300)
 
         for ziel in self.ziele:
             ziel.bewegeDich(4)

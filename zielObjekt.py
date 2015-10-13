@@ -1,6 +1,6 @@
 import random
 
-farbkatalog= ["#e81b7b", "#15c1c1", "#b20e42"]
+farbkatalog = ["#e81b7b", "#15c1c1", "#b20e42"]
 
 def erzeugeZiel(minX, maxX, minY, maxY, groesse=None, farbe=None, typ=None):
 

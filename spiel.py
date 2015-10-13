@@ -10,13 +10,16 @@ class spiel:
         erzeugteZiele = []
 
         for i in range(anzahl):
-            ziel = zielObjekt.erzeugeZiel(600,600,minY,maxY)
+            ziel = zielObjekt.erzeugeZiel(600, 600, minY, maxY)
             erzeugteZiele.append(ziel)
         
         self.ziele += erzeugteZiele
 
     def start(self):
+        self.letzteWelle = time.time()
+        self.startzeitpunkt = time.time()
         self.letzte_hauptschleife = time.time()
+
         self.hauptschleife()
         self.spielfenster.mainloop()
 
@@ -50,8 +53,9 @@ class spiel:
 
         self.spielfigur.y = self.maushoehe
 
-        if(random.randint(0,100) > 95):
-            self.erzeugeZiele(random.randint(1,43),0,300)
+        if(time.time() - self.letzteWelle > 0.5):
+            self.erzeugeZiele(random.randint(1,3),50,250)
+            self.letzteWelle = time.time()
 
         for ziel in self.ziele:
             ziel.bewegeDich(4)
@@ -67,12 +71,11 @@ class spiel:
 
 
     def mausBewegt(self, ereignis):
-        #print(str(ereignis.x) + " - " + str(ereignis.y))
         self.maushoehe = ereignis.y
 
     def __init__(self):
         #Lege das FPS(Frames per second)-limit fest
-        self.gewuenschteFPS = 60
+        self.gewuenschteFPS = 40
 
         #Erstelle das Programmfenster und lege seine Größe fest.
         self.spielfenster = tkinter.Tk()
@@ -85,14 +88,13 @@ class spiel:
         #Zeichne den Spielfeldhintergrund
         self.spielfeld.create_rectangle(0, 0, 600, 300,
                                          fill="#000",outline="")
-        
         self.spielfeld.pack()
 
         #Initalisiere die Spielfigur
         self.spielfigur = spieler.spieler(breite=30, hoehe=20)
         self.maushoehe = self.spielfigur.y
 
-        #Lege Eventhandeling für Tasten fest
+        #Lege Eventhandeling die Mausbewegung fest
         self.spielfeld.bind('<Motion>', self.mausBewegt)
 
         #Starte das Spiel

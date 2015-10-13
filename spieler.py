@@ -1,7 +1,10 @@
 class spieler:
-    def __init__(self):
-        self.x = 60
-        self.y = 0
+    def __init__(self,x=60,y=0,breite=45,hoehe=45):
+        self.x = x
+        self.y = y
+        self.breite = breite
+        self.hoehe = hoehe
+
         self.zeichnung = None
 
     def zeichne(self, malflaeche):
@@ -10,7 +13,7 @@ class spieler:
         malflaeche.delete(self.zeichnung)
         
         self.zeichnung = malflaeche.create_rectangle(self.x, self.y,
-                                                     self.x + 45,
-                                                     self.y + 45,
+                                                     self.x + self.breite,
+                                                     self.y + self.hoehe,
                                                      fill="#00ff00",
-                                                     outline="")
+                                                     outline="#0000ff")

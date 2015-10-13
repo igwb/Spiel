@@ -34,18 +34,28 @@ class spiel:
 
     def aktualisiere(self):
 
-        if(random.randint(0,100) > 99):
+        self.spielfigur.y = self.maushoehe
+
+        if(random.randint(0,100) > 90):
             self.erzeugeZiele(random.randint(1,5),0,300)
 
         for ziel in self.ziele:
-            ziel.bewegeDich(1)
+            ziel.bewegeDich(4)
+           
+            if(ziel.x <= self.spielfigur.x + 40):
+                if((ziel.y + ziel.groesse >= self.spielfigur.y) and 
+                        (ziel.y <= self.spielfigur.y + self.spielfigur.hoehe)):
+                    ziel.valide = False
+                    print("HIT")
+
             if(not ziel.valide):
                 self.spielfeld.delete(ziel.zeichnung)
                 self.ziele.remove(ziel)
 
+
     def mausBewegt(self, ereignis):
         #print(str(ereignis.x) + " - " + str(ereignis.y))
-        self.spielfigur.y = ereignis.y
+        self.maushoehe = ereignis.y
 
     def __init__(self):
         #Lege das FPS(Frames per second)-limit fest
@@ -67,6 +77,7 @@ class spiel:
 
         #Initalisiere die Spielfigur
         self.spielfigur = spieler.spieler()
+        self.maushoehe = self.spielfigur.y
 
         #Lege Eventhandeling für Tasten fest
         self.spielfeld.bind('<Motion>', self.mausBewegt)

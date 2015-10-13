@@ -1,15 +1,22 @@
 import tkinter
-import gegenstand
-import zeichenManager
+import zielObjekt
+import random
 
 class spiel:
 
-    def erzeugeGegenstaende(self, anzahl):
-        erzeugteObjekte = []
+    def erzeugeZiele(self, anzahl, minY, maxY):
+        erzeugteZiele = []
 
         for i in range(anzahl):
-            erzeugteObjekte.append(gegenstand.gegenstand())
-        return erzeugteObjekte
+            ziel = zielObjekt.zielObjekt()
+            ziel.x = 300
+            ziel.y = random.randint(minY, maxY)
+            erzeugteZiele.append(ziel)
+        return erzeugteZiele
+
+    def start(self):
+        self.hauptschleife()
+        self.spiel_fenster.mainloop()
 
     def hauptschleife(self):
         self.aktualisiere()
@@ -18,12 +25,15 @@ class spiel:
         self.spiel_fenster.after(10, self.hauptschleife)
 
     def zeichne(self):
-        print("zeichnet")
-        zeichenManager.zeichne(self.spiel_feld)
+        for ziel in self.ziele:
+            ziel.zeichne(self.spielfeld)
 
     def aktualisiere(self):
         for ziel in self.ziele:
             ziel.bewegeDich(1)
+            if(not ziel.valide):
+                self.spielfeld.delete(ziel.zeichnung)
+                self.ziele.remove(ziel)
 
     def __init__(self):
         #Lege das FPS(Frames per second)-limit fest
@@ -35,19 +45,17 @@ class spiel:
         self.spiel_fenster.geometry("600x400")
 
         #Erstelle das Spielfeld und lege seine Größe fest.
-        self.spiel_feld = tkinter.Canvas(width=600,height=300)
+        self.spielfeld = tkinter.Canvas(width=600,height=300)
 
         #Zeichne den Spielfeldhintergrund
-        self.spiel_feld.create_rectangle(0, 0, 600, 300,
+        self.spielfeld.create_rectangle(0, 0, 600, 300,
                                          fill="#000",outline="")
-        self.spiel_feld.pack()
+        self.spielfeld.pack()
 
         #Starte das Spiel
-        self.ziele = self.erzeugeGegenstaende(1)
-        zeichenManager.zeichenObjekte = self.ziele
+        self.ziele = self.erzeugeZiele(3, 0, 300)
 
-        self.hauptschleife()
-        self.spiel_fenster.mainloop()
+        self.start()
 
 if(__name__=="__main__"):
     spiel()

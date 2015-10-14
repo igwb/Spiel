@@ -5,7 +5,6 @@ import spieler
 import time
 
 class spiel:
-
     def erzeugeZiele(self, anzahl, minY, maxY):
         erzeugteZiele = []
 
@@ -54,7 +53,7 @@ class spiel:
         self.spielfigur.y = self.maushoehe
 
         if(time.time() - self.letzteWelle > 0.5):
-            self.erzeugeZiele(random.randint(1,3),50,250)
+            self.erzeugeZiele(random.randint(1, 3), 50, 250)
             self.letzteWelle = time.time()
 
         for ziel in self.ziele:
@@ -83,11 +82,11 @@ class spiel:
         self.spielfenster.geometry("600x400")
 
         #Erstelle das Spielfeld und lege seine Größe fest.
-        self.spielfeld = tkinter.Canvas(width=600,height=300)
+        self.spielfeld = tkinter.Canvas(width=600, height=300)
 
         #Zeichne den Spielfeldhintergrund
         self.spielfeld.create_rectangle(0, 0, 600, 300,
-                                         fill="#000",outline="")
+                                         fill="#000", outline="")
         self.spielfeld.pack()
 
         #Initalisiere die Spielfigur

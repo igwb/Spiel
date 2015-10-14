@@ -91,6 +91,25 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "Spiel.sublime-project",
+			"settings":
+			{
+				"buffer_size": 71,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "class spieler:\n    def __init__(self,x=60,y=0,breite=45,hoehe=45):\n        self.x = x\n        self.y = y\n        self.breite = breite\n        self.hoehe = hoehe\n\n        self.zeichnung = None\n\n    def zeichne(self, malflaeche):\n        #Lösche die vorherige Zeichnung von der malflaeche und fertige eine\n        #neue an.\n        malflaeche.delete(self.zeichnung)\n        \n        self.zeichnung = malflaeche.create_rectangle(self.x, self.y,\n                                                     self.x + self.breite,\n                                                     self.y + self.hoehe,\n                                                     fill=\"#00ff00\",\n                                                     outline=\"#0000ff\")\n\n        ",
+			"file": "spieler.py",
+			"file_size": 750,
+			"file_write_time": 130892144560000000,
+			"settings":
+			{
+				"buffer_size": 741,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "Packages/Python/Python.sublime-build",
 	"command_palette":
@@ -116,6 +135,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/bodo/Desktop/Spiel/bg.png",
 		"/C/Users/Bodo Beyer/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/F/BodoBeyer/Desktop/hello.py",
 		"/C/Users/Bodo Beyer/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
@@ -161,8 +181,64 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "Spiel.sublime-project",
+					"settings":
+					{
+						"buffer_size": 71,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4,
+								4
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "spieler.py",
+					"settings":
+					{
+						"buffer_size": 741,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								741,
+								741
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],

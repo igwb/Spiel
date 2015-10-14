@@ -9,7 +9,8 @@ class spiel:
         erzeugteZiele = []
 
         for i in range(anzahl):
-            ziel = zielObjekt.erzeugeZiel(600, 600, minY, maxY)
+            ziel = zielObjekt.erzeugeZiel(600, 600, minY, maxY,
+                                          self.spielfeld)
             erzeugteZiele.append(ziel)
         
         self.ziele += erzeugteZiele
@@ -43,7 +44,7 @@ class spiel:
 
     def zeichne(self):
         for ziel in self.ziele:
-            ziel.zeichne(self.spielfeld)
+            ziel.aktualisiere()
 
         self.spielfigur.zeichne(self.spielfeld)
 

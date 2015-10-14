@@ -1,19 +1,31 @@
+import tkinter
+
 class spieler:
-    def __init__(self, x=60, y=0, breite=45, hoehe=45):
+    def __init__(self, x, y, bild):
         self.x = x
         self.y = y
-        self.breite = breite
-        self.hoehe = hoehe
 
+        #Lege die Position fest, an die das Objekt bewegt werden soll
+        self.zielX = self.x
+        self.zielY = self.y
+
+        self.hoehe = bild.height()
+        self.breite = bild.width()
+
+        self.bild = bild
         self.zeichnung = None
 
-    def zeichne(self, malflaeche):
-        #Lösche die vorherige Zeichnung von der malflaeche und fertige eine
-        #neue an.
-        malflaeche.delete(self.zeichnung)
-        
-        self.zeichnung = malflaeche.create_rectangle(self.x, self.y,
-                                                     self.x + self.breite,
-                                                     self.y + self.hoehe,
-                                                     fill="#00ff00",
-                                                     outline="#0000ff")
+    def aktualisiere(self, malflaeche):
+        if(self.zeichnung == None):
+            self.zeichnung = malflaeche.create_image(self.x, self.y, 
+                                                     image=self.bild)
+        else:
+            malflaeche.move(self.zeichnung, self.zielX - self.x,
+                                    self.zielY - self.y)
+
+            self.x = self.zielX
+            self.y = self.zielY
+
+    def setzePosition(self, x, y):
+        self.zielX = x
+        self.zielY = y

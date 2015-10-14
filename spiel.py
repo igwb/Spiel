@@ -14,6 +14,10 @@ class Konst:
     SPIELFELD_BREITE = 600
     SPIELFELD_FARBE = "#000000"
 
+    SPIELER_GRAFIK = "spieler.png"
+    SPIELER_START_X = 60
+    SPIELER_START_Y = SPIELFELD_HOEHE / 2
+
     #FPS (frames per second) - Aufrufe der Hauptschleife pro Sekunde
     FPS=40
 
@@ -59,11 +63,9 @@ class spiel:
         for ziel in self.ziele:
             ziel.aktualisiere()
 
-        self.spielfigur.zeichne(self.spielfeld)
+        self.spielfigur.aktualisiere(self.spielfeld)
 
     def aktualisiere(self):
-        self.spielfigur.y = self.maushoehe
-
         if(time.time() - self.letzteWelle > self.wellenabstand):
             self.erzeugeZiele(random.randint(1, 3), 50, 250)
             self.letzteWelle = time.time()
@@ -82,7 +84,7 @@ class spiel:
 
 
     def mausBewegt(self, ereignis):
-        self.maushoehe = ereignis.y
+        self.spielfigur.setzePosition(self.spielfigur.zielX, ereignis.y)
 
     def __init__(self):
         #Erstelle das Programmfenster und lege seine Größe fest.
@@ -103,8 +105,9 @@ class spiel:
         self.spielfeld.pack()
 
         #Initalisiere die Spielfigur
-        self.spielfigur = spieler.spieler(breite=30, hoehe=20)
-        self.maushoehe = self.spielfigur.y
+        bild = tkinter.PhotoImage(file=Konst.SPIELER_GRAFIK)
+        self.spielfigur = spieler.spieler(Konst.SPIELER_START_X, 
+                                          Konst.SPIELER_START_Y, bild)
 
         #Lege Eventhandeling die Mausbewegung fest
         self.spielfeld.bind('<Motion>', self.mausBewegt)
@@ -114,7 +117,6 @@ class spiel:
 
         #Starte das Spiel
         self.ziele = []
-
         self.start()
 
 if(__name__=="__main__"):

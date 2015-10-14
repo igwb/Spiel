@@ -23,7 +23,6 @@ class spiel:
         self.spielfenster.mainloop()
 
     def hauptschleife(self):
-
         self.aktualisiere()
         self.zeichne()
 
@@ -49,10 +48,9 @@ class spiel:
         self.spielfigur.zeichne(self.spielfeld)
 
     def aktualisiere(self):
-
         self.spielfigur.y = self.maushoehe
 
-        if(time.time() - self.letzteWelle > 0.5):
+        if(time.time() - self.letzteWelle > self.wellenabstand):
             self.erzeugeZiele(random.randint(1, 3), 50, 250)
             self.letzteWelle = time.time()
 
@@ -95,6 +93,9 @@ class spiel:
 
         #Lege Eventhandeling die Mausbewegung fest
         self.spielfeld.bind('<Motion>', self.mausBewegt)
+
+        #Lege den Abstand zwischen den Wellen fest
+        self.wellenabstand = 0.9
 
         #Starte das Spiel
         self.ziele = []

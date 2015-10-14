@@ -20,11 +20,10 @@ def erzeugeZiel(minX, maxX, minY, maxY, groesse=None, farbe=None, typ=None):
 
 
 class zielObjekt:
-   
     QUADRAT = 0
     KREIS = 1
 
-    def __init__(self,x,y,groesse,farbe,typ):
+    def __init__(self, x, y, groesse, farbe, typ):
         self.farbe = farbe
         self.groesse = groesse
         self.x = x

@@ -1,5 +1,5 @@
 class spieler:
-    def __init__(self,x=60,y=0,breite=45,hoehe=45):
+    def __init__(self, x=60, y=0, breite=45, hoehe=45):
         self.x = x
         self.y = y
         self.breite = breite

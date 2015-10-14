@@ -92,21 +92,29 @@
 	"buffers":
 	[
 		{
-			"file": "Spiel.sublime-project",
+			"file": "spiel.py",
 			"settings":
 			{
-				"buffer_size": 71,
-				"line_ending": "Unix"
+				"buffer_size": 3208,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "class spieler:\n    def __init__(self,x=60,y=0,breite=45,hoehe=45):\n        self.x = x\n        self.y = y\n        self.breite = breite\n        self.hoehe = hoehe\n\n        self.zeichnung = None\n\n    def zeichne(self, malflaeche):\n        #Lösche die vorherige Zeichnung von der malflaeche und fertige eine\n        #neue an.\n        malflaeche.delete(self.zeichnung)\n        \n        self.zeichnung = malflaeche.create_rectangle(self.x, self.y,\n                                                     self.x + self.breite,\n                                                     self.y + self.hoehe,\n                                                     fill=\"#00ff00\",\n                                                     outline=\"#0000ff\")\n\n        ",
+			"contents": "class spieler:\n    def __init__(self, x=60, y=0, breite=45, hoehe=45):\n        self.x = x\n        self.y = y\n        self.breite = breite\n        self.hoehe = hoehe\n\n        self.zeichnung = None\n\n    def zeichne(self, malflaeche):\n        #Lösche die vorherige Zeichnung von der malflaeche und fertige eine\n        #neue an.\n        malflaeche.delete(self.zeichnung)\n        \n        self.zeichnung = malflaeche.create_rectangle(self.x, self.y,\n                                                     self.x + self.breite,\n                                                     self.y + self.hoehe,\n                                                     fill=\"#00ff00\",\n                                                     outline=\"#0000ff\")",
 			"file": "spieler.py",
 			"file_size": 750,
 			"file_write_time": 130892144560000000,
 			"settings":
 			{
-				"buffer_size": 741,
+				"buffer_size": 735,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "zielObjekt.py",
+			"settings":
+			{
+				"buffer_size": 1985,
 				"line_ending": "Windows"
 			}
 		}
@@ -114,11 +122,15 @@
 	"build_system": "Packages/Python/Python.sublime-build",
 	"command_palette":
 	{
-		"height": 0.0,
+		"height": 104.0,
 		"selected_items":
 		[
+			[
+				"remov",
+				"Package Control: Remove Package"
+			]
 		],
-		"width": 0.0
+		"width": 528.0
 	},
 	"console":
 	{
@@ -135,6 +147,9 @@
 	},
 	"file_history":
 	[
+		"/C/Users/bodo/Desktop/Spiel/__init__",
+		"/C/Users/bodo/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/bodo/Desktop/Spiel/Spiel.sublime-project",
 		"/C/Users/bodo/Desktop/Spiel/bg.png",
 		"/C/Users/Bodo Beyer/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/F/BodoBeyer/Desktop/hello.py",
@@ -144,7 +159,7 @@
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -181,28 +196,66 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Spiel.sublime-project",
+					"file": "spiel.py",
 					"settings":
 					{
-						"buffer_size": 71,
+						"buffer_size": 3208,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4,
-								4
+								400,
+								400
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+							"auto_complete": false,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "spieler.py",
+					"settings":
+					{
+						"buffer_size": 735,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								60,
+								60
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -211,19 +264,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "spieler.py",
+					"buffer": 2,
+					"file": "zielObjekt.py",
 					"settings":
 					{
-						"buffer_size": 741,
+						"buffer_size": 1985,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								741,
-								741
+								495,
+								495
 							]
 						],
 						"settings":
@@ -259,11 +312,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.504329004329,
 			1.0
 		],
 		"rows":

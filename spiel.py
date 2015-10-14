@@ -4,6 +4,19 @@ import random
 import spieler
 import time
 
+class Konst:
+    """Beinhaltet wichtige Konstanten"""
+
+    FENSTER_HOEHE = 400
+    FENSTER_BREITE = 600
+
+    SPIELFELD_HOEHE = 300
+    SPIELFELD_BREITE = 600
+    SPIELFELD_FARBE = "#000000"
+
+    #FPS (frames per second) - Aufrufe der Hauptschleife pro Sekunde
+    FPS=40
+
 class spiel:
     def erzeugeZiele(self, anzahl, minY, maxY):
         erzeugteZiele = []
@@ -31,7 +44,7 @@ class spiel:
         verstrichene_zeit = jetzt - self.letzte_hauptschleife
         self.letzte_hauptschleife = jetzt
 
-        optimale_verstrichene_zeit = 1./self.gewuenschteFPS
+        optimale_verstrichene_zeit = 1./Konst.FPS
 
         schlafenszeit = int((optimale_verstrichene_zeit - verstrichene_zeit) 
                             * 1000)
@@ -72,20 +85,21 @@ class spiel:
         self.maushoehe = ereignis.y
 
     def __init__(self):
-        #Lege das FPS(Frames per second)-limit fest
-        self.gewuenschteFPS = 40
-
         #Erstelle das Programmfenster und lege seine Größe fest.
         self.spielfenster = tkinter.Tk()
         self.spielfenster.resizable(width=False, height=False)
-        self.spielfenster.geometry("600x400")
+        self.spielfenster.geometry(str(Konst.FENSTER_BREITE) + "x" + 
+                                   str(Konst.FENSTER_HOEHE))
 
         #Erstelle das Spielfeld und lege seine Größe fest.
-        self.spielfeld = tkinter.Canvas(width=600, height=300)
+        self.spielfeld = tkinter.Canvas(width=Konst.SPIELFELD_BREITE,
+                                        height=Konst.SPIELFELD_HOEHE)
 
         #Zeichne den Spielfeldhintergrund
-        self.spielfeld.create_rectangle(0, 0, 600, 300,
-                                         fill="#000", outline="")
+        self.spielfeld.create_rectangle(0, 0, Konst.SPIELFELD_BREITE,
+                                        Konst.SPIELFELD_HOEHE,
+                                        fill=Konst.SPIELFELD_FARBE,
+                                        outline="")
         self.spielfeld.pack()
 
         #Initalisiere die Spielfigur

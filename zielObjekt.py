@@ -3,12 +3,12 @@ import os
 import tkinter
 
 class Konst:
+    """Beinhaltet wichtige Konstanten"""
 
     GRAFIKEN_STEIN = ["stein0.png", "stein1.png", "stein2.png"]
     GRAFIK_TREIBSTOFF = ["treibstoff.png"]
 
 def erzeugeZiel(minX, maxX, minY, maxY, maluntergrund, typ=None):
-
     x = random.randint(minX, maxX)
     y = random.randint(minY, maxY)
 

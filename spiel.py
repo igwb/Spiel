@@ -10,7 +10,7 @@ class Konst:
     FENSTER_HOEHE = 400
     FENSTER_BREITE = 600
 
-    SPIELFELD_HOEHE = 300
+    SPIELFELD_HOEHE = 250
     SPIELFELD_BREITE = 600
     SPIELFELD_FARBE = "#000000"
 
@@ -20,7 +20,10 @@ class Konst:
 
     WELLEN_ABSTAND = 0.5
     WELLEN_GROESSE_MIN = 1
-    WELLEN_GROESSE_MAX = 2
+    WELLEN_GROESSE_MAX = 3
+
+    #Gewichtung der Zielobjekt-Typen 
+    ZIELOBJEKT_WAHRSCHEINLICHKEITEN = [4, 1]
 
     #FPS (frames per second) - Aufrufe der Hauptschleife pro Sekunde
     FPS=40
@@ -30,8 +33,15 @@ class spiel:
         erzeugteZiele = []
 
         for i in range(anzahl):
-            ziel = zielObjekt.erzeugeZiel(600, 600, minY, maxY,
-                                          self.spielfeld)
+            y = random.randint(minY, maxY)
+
+            liste = []
+            for t in range(len(Konst.ZIELOBJEKT_WAHRSCHEINLICHKEITEN)):
+                liste += [str(t)] * Konst.ZIELOBJEKT_WAHRSCHEINLICHKEITEN[t]
+            typ = int(random.choice(liste))
+
+            ziel = zielObjekt.zielObjekt(600, y, typ, self.spielfeld)
+
             erzeugteZiele.append(ziel)
         
         self.ziele += erzeugteZiele

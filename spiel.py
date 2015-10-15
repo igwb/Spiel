@@ -78,8 +78,9 @@ class spiel:
         for ziel in self.ziele:
             ziel.bewegeDich(4)
            
-            if(ziel.x <= self.spielfigur.x + self.spielfigur.breite) and (ziel.x >= self.spielfigur.x):
-                if((ziel.y + ziel.groesse >= self.spielfigur.y) and 
+            if((ziel.x <= self.spielfigur.x + self.spielfigur.breite) and 
+               (ziel.x >= self.spielfigur.x)):
+                if((ziel.y + ziel.hoehe >= self.spielfigur.y) and 
                    (ziel.y <= self.spielfigur.y + self.spielfigur.hoehe)):
                     ziel.valide = False
 

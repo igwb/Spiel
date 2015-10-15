@@ -1,33 +1,28 @@
 import random
+import os
+import tkinter
 
-farbkatalog = ["#e81b7b", "#15c1c1", "#b20e42"]
+class Konst:
 
-def erzeugeZiel(minX, maxX, minY, maxY, maluntergrund, 
-                groesse=None, farbe=None, typ=None):
+    GRAFIKEN_STEIN = ["stein0.png", "stein1.png", "stein2.png"]
+    GRAFIK_TREIBSTOFF = ["treibstoff.png"]
+
+def erzeugeZiel(minX, maxX, minY, maxY, maluntergrund, typ=None):
 
     x = random.randint(minX, maxX)
     y = random.randint(minY, maxY)
 
-    if(groesse == None):
-        groesse = random.randint(15,25)
-
-    if(farbe == None):
-        farbe = farbkatalog[random.randint(0,len(farbkatalog) - 1)]
-
     if(typ == None):
         typ = random.randint(0,1)
 
-    return zielObjekt(x, y, groesse, farbe, typ, maluntergrund)
+    return zielObjekt(x, y, typ, maluntergrund)
 
 
 class zielObjekt:
-    QUADRAT = 0
-    KREIS = 1
+    Stein = 0
+    Treibstoff = 1
 
-    def __init__(self, x, y, groesse, farbe, typ, maluntergrund):
-        self.farbe = farbe
-        self.groesse = groesse
-
+    def __init__(self, x, y, typ, maluntergrund):
         self.x = x
         self.y = y
 
@@ -35,40 +30,35 @@ class zielObjekt:
         self.zielX = self.x
         self.zielY = self.y
 
-        self.maluntergrund = maluntergrund
-
-        self.zeichnung = None
         self.valide = True
         self.typ = typ
 
+        self.maluntergrund = maluntergrund
+        self.zeichnung = None
+
+        #Wähle die zu verwendende Grafik entsprechend dem Typ aus
+        if(self.typ == self.Stein):
+            bilddatei = Konst.GRAFIKEN_STEIN[random.randint(0,
+                                               len(Konst.GRAFIKEN_STEIN) - 1)]
+        elif(self.typ == self.Treibstoff):
+            bilddatei = Konst.GRAFIK_TREIBSTOFF
+
+        self.bild = tkinter.PhotoImage(file=bilddatei)
+
+        self.hoehe = self.bild.height()
+        self.breite = self.bild.width()
+
     def aktualisiere(self):
-
         if(self.zeichnung == None):
-            if(self.typ == self.QUADRAT):
-                self.zeichneQuadrat()
-            elif(self.typ == self.KREIS):
-                self.zeichneKreis()
+            self.zeichnung = self.maluntergrund.create_image(self.x,
+                                                             self.y, 
+                                                             image=self.bild)
 
-        self.maluntergrund.move(self.zeichnung,self.zielX - self.x,
-                                self.zielY - self.y)
+        self.maluntergrund.move(self.zeichnung, self.zielX - self.x,
+                                    self.zielY - self.y)
 
         self.x = self.zielX
         self.y = self.zielY
-
-    
-    def zeichneQuadrat(self):
-        self.zeichnung = self.maluntergrund.create_rectangle(self.x, self.y,
-                                                     self.x + self.groesse,
-                                                     self.y + self.groesse,
-                                                     fill=self.farbe,
-                                                     outline="")
-    def zeichneKreis(self):
-        self.zeichnung = self.maluntergrund.create_oval(self.x, self.y,
-                                                    self.x + self.groesse,
-                                                    self.y + self.groesse,
-                                                    fill=self.farbe,
-                                                    outline="")      
-
 
     def bewegeDich(self, distanz):
         #Verschiebe die x-Koordinate um distanz nach links und makriere das

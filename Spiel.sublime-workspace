@@ -4,12 +4,156 @@
 		"selected_items":
 		[
 			[
-				"fo",
-				"found"
+				"SPIE",
+				"SPIELER_START_Y〔variable〕"
+			],
+			[
+				"SPIELER",
+				"SPIELER_START_X〔variable〕"
+			],
+			[
+				"SP",
+				"SPIELFELD_HOEHE〔variable〕"
+			],
+			[
+				"er",
+				"ereignis〔argument〕"
+			],
+			[
+				"sp",
+				"spielfigur〔variable〕"
+			],
+			[
+				"spie",
+				"spielfeld〔variable〕"
+			],
+			[
+				"Sp",
+				"SPIELFELD_FARBE〔variable〕"
+			],
+			[
+				"mal",
+				"maluntergrund〔argument〕"
+			],
+			[
+				"zi",
+				"zielX〔variable〕"
+			],
+			[
+				"zei",
+				"zeichneKreis"
+			],
+			[
+				"ma",
+				"malflaeche〔argument〕"
+			],
+			[
+				"ze",
+				"zeichnung〔variable〕"
 			],
 			[
 				"pr",
-				"print"
+				"print〔keyword〕"
+			],
+			[
+				"z",
+				"zeichnung〔variable〕"
+			],
+			[
+				"le",
+				"letzteWelle"
+			],
+			[
+				"l",
+				"letzteWelle"
+			],
+			[
+				"st",
+				"startzeitpunkt"
+			],
+			[
+				"ra",
+				"randint"
+			],
+			[
+				"rand",
+				"random"
+			],
+			[
+				"far",
+				"farbkatalog"
+			],
+			[
+				"f",
+				"farbe"
+			],
+			[
+				"min",
+				"minX"
+			],
+			[
+				"ziel",
+				"zielObjekt"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"spiel",
+				"spielfeld"
+			],
+			[
+				"spe",
+				"spielfeld"
+			],
+			[
+				"sch",
+				"schlafenszeit"
+			],
+			[
+				"schl",
+				"schlafenszeit"
+			],
+			[
+				"re",
+				"remove"
+			],
+			[
+				"ge",
+				"gezeichnet"
+			],
+			[
+				"zeic",
+				"zeichne"
+			],
+			[
+				"zeich",
+				"zeichne"
+			],
+			[
+				"gegen",
+				"gegenstand"
+			],
+			[
+				"geg",
+				"gegenstand"
+			],
+			[
+				"__",
+				"__main__"
+			],
+			[
+				"slee",
+				"sleep_time"
+			],
+			[
+				"game",
+				"game_is_running"
+			],
+			[
+				"fo",
+				"found"
 			],
 			[
 				"combn",
@@ -40,16 +184,8 @@
 				"next_previous"
 			],
 			[
-				"re",
-				"return"
-			],
-			[
 				"rem",
 				"remaining_letters"
-			],
-			[
-				"le",
-				"letters"
 			],
 			[
 				"str",
@@ -95,18 +231,15 @@
 			"file": "spiel.py",
 			"settings":
 			{
-				"buffer_size": 3208,
+				"buffer_size": 3948,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "class spieler:\n    def __init__(self, x=60, y=0, breite=45, hoehe=45):\n        self.x = x\n        self.y = y\n        self.breite = breite\n        self.hoehe = hoehe\n\n        self.zeichnung = None\n\n    def zeichne(self, malflaeche):\n        #Lösche die vorherige Zeichnung von der malflaeche und fertige eine\n        #neue an.\n        malflaeche.delete(self.zeichnung)\n        \n        self.zeichnung = malflaeche.create_rectangle(self.x, self.y,\n                                                     self.x + self.breite,\n                                                     self.y + self.hoehe,\n                                                     fill=\"#00ff00\",\n                                                     outline=\"#0000ff\")",
 			"file": "spieler.py",
-			"file_size": 750,
-			"file_write_time": 130892144560000000,
 			"settings":
 			{
-				"buffer_size": 735,
+				"buffer_size": 858,
 				"line_ending": "Windows"
 			}
 		},
@@ -114,7 +247,15 @@
 			"file": "zielObjekt.py",
 			"settings":
 			{
-				"buffer_size": 1985,
+				"buffer_size": 2448,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "test.py",
+			"settings":
+			{
+				"buffer_size": 549,
 				"line_ending": "Windows"
 			}
 		}
@@ -128,13 +269,29 @@
 			[
 				"remov",
 				"Package Control: Remove Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
 			]
 		],
 		"width": 528.0
 	},
 	"console":
 	{
-		"height": 0.0
+		"height": 125.0
 	},
 	"distraction_free":
 	{
@@ -147,12 +304,13 @@
 	},
 	"file_history":
 	[
-		"/C/Users/bodo/Desktop/Spiel/__init__",
-		"/C/Users/bodo/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/bodo/Desktop/Spiel/Spiel.sublime-project",
-		"/C/Users/bodo/Desktop/Spiel/bg.png",
+		"/F/BodoBeyer/Desktop/Spiel/spieler.py",
 		"/C/Users/Bodo Beyer/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Bodo Beyer/AppData/Roaming/Sublime Text 2/Packages/Pylinter/Pylinter.sublime-settings",
 		"/F/BodoBeyer/Desktop/hello.py",
+		"/F/BodoBeyer/Desktop/Spiel/zeichenManager.py",
+		"/F/BodoBeyer/Desktop/Spiel/main.py",
+		"/F/BodoBeyer/Desktop/Spiel/__init__",
 		"/C/Users/Bodo Beyer/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/C/Users/Bodo Beyer/AppData/Roaming/Sublime Text 2/Packages/User/Python.sublime-settings",
 		"/F/BodoBeyer/Desktop/test.py"
@@ -173,6 +331,33 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"SPIELFELD",
+			"self.gewuenschteFPS",
+			"SPIELFELD_BREITE",
+			"malflaeche",
+			"self",
+			"self.",
+			"\\",
+			"/",
+			"dichte",
+			"anzahl",
+			"height",
+			"width",
+			"spieler",
+			"spiel_fenster",
+			"gegenstand",
+			"letze_zeit",
+			"erzeugeGegenstaende",
+			"spiel_feld",
+			"zeichenobjekte",
+			"size",
+			"self",
+			"spiel_fenster",
+			"	",
+			"desiredFPS",
+			"letzter_Zeitpunkt",
+			"sleep_time",
+			"render",
 			"letters",
 			"combine_letters",
 			"found",
@@ -186,6 +371,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"    "
 		],
 		"reverse": false,
 		"show_context": true,
@@ -204,26 +390,30 @@
 					"file": "spiel.py",
 					"settings":
 					{
-						"buffer_size": 3208,
+						"buffer_size": 3948,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								400,
-								400
+								2175,
+								2175
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
+							"rulers":
+							[
+								78
+							],
 							"syntax": "Packages/Python/Python.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 540.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -231,7 +421,7 @@
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -239,15 +429,15 @@
 					"file": "spieler.py",
 					"settings":
 					{
-						"buffer_size": 735,
+						"buffer_size": 858,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								60,
-								60
+								680,
+								680
 							]
 						],
 						"settings":
@@ -268,23 +458,54 @@
 					"file": "zielObjekt.py",
 					"settings":
 					{
-						"buffer_size": 1985,
+						"buffer_size": 2448,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								495,
-								495
+								5,
+								5
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
+							"rulers":
+							[
+								78
+							],
 							"syntax": "Packages/Python/Python.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "test.py",
+					"settings":
+					{
+						"buffer_size": 549,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								549,
+								549
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -323,7 +544,7 @@
 		"cols":
 		[
 			0.0,
-			0.504329004329,
+			0.409039548023,
 			1.0
 		],
 		"rows":
@@ -339,7 +560,7 @@
 	},
 	"replace":
 	{
-		"height": 0.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -359,7 +580,7 @@
 		"width": 0.0
 	},
 	"show_minimap": true,
-	"show_open_files": false,
+	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 150.0,

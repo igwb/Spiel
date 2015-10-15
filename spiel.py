@@ -18,6 +18,10 @@ class Konst:
     SPIELER_START_X = 60
     SPIELER_START_Y = SPIELFELD_HOEHE / 2
 
+    WELLEN_ABSTAND = 0.5
+    WELLEN_GROESSE_MIN = 1
+    WELLEN_GROESSE_MAX = 2
+
     #FPS (frames per second) - Aufrufe der Hauptschleife pro Sekunde
     FPS=40
 
@@ -66,16 +70,17 @@ class spiel:
         self.spielfigur.aktualisiere(self.spielfeld)
 
     def aktualisiere(self):
-        if(time.time() - self.letzteWelle > self.wellenabstand):
-            self.erzeugeZiele(random.randint(1, 3), 50, 250)
+        if(time.time() - self.letzteWelle > Konst.WELLEN_ABSTAND):
+            groesse = random.randint(Konst.WELLEN_GROESSE_MIN, Konst.WELLEN_GROESSE_MAX)
+            self.erzeugeZiele(groesse, 50, 250)
             self.letzteWelle = time.time()
 
         for ziel in self.ziele:
             ziel.bewegeDich(4)
            
-            if(ziel.x <= self.spielfigur.x + self.spielfigur.hoehe):
+            if(ziel.x <= self.spielfigur.x + self.spielfigur.breite) and (ziel.x >= self.spielfigur.x):
                 if((ziel.y + ziel.groesse >= self.spielfigur.y) and 
-                        (ziel.y <= self.spielfigur.y + self.spielfigur.hoehe)):
+                   (ziel.y <= self.spielfigur.y + self.spielfigur.hoehe)):
                     ziel.valide = False
 
             if(not ziel.valide):
@@ -111,9 +116,6 @@ class spiel:
 
         #Lege Eventhandeling die Mausbewegung fest
         self.spielfeld.bind('<Motion>', self.mausBewegt)
-
-        #Lege den Abstand zwischen den Wellen fest
-        self.wellenabstand = 0.9
 
         #Starte das Spiel
         self.ziele = []

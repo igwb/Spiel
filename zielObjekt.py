@@ -8,20 +8,10 @@ class Konst:
     GRAFIKEN_STEIN = ["stein0.png", "stein1.png", "stein2.png"]
     GRAFIK_TREIBSTOFF = ["treibstoff.png"]
 
-def erzeugeZiel(minX, maxX, minY, maxY, maluntergrund, typ=None):
-    x = random.randint(minX, maxX)
-    y = random.randint(minY, maxY)
-
-    if(typ == None):
-        typ = random.randint(0,1)
-
-    return zielObjekt(x, y, typ, maluntergrund)
-
+    STEIN = 0
+    TREIBSTOFF = 1
 
 class zielObjekt:
-    Stein = 0
-    Treibstoff = 1
-
     def __init__(self, x, y, typ, maluntergrund):
         self.x = x
         self.y = y
@@ -37,10 +27,10 @@ class zielObjekt:
         self.zeichnung = None
 
         #Wähle die zu verwendende Grafik entsprechend dem Typ aus
-        if(self.typ == self.Stein):
+        if(self.typ == Konst.STEIN):
             bilddatei = Konst.GRAFIKEN_STEIN[random.randint(0,
                                                len(Konst.GRAFIKEN_STEIN) - 1)]
-        elif(self.typ == self.Treibstoff):
+        elif(self.typ == Konst.TREIBSTOFF):
             bilddatei = Konst.GRAFIK_TREIBSTOFF
 
         self.bild = tkinter.PhotoImage(file=bilddatei)

@@ -1,7 +1,12 @@
 import tkinter
 
+class Konst:
+    """Beinhaltet wichtige Konstanten"""
+
+    GRAFIK_SPIELER = "spieler.png"
+
 class spieler:
-    def __init__(self, x, y, bild):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
 
@@ -9,18 +14,20 @@ class spieler:
         self.zielX = self.x
         self.zielY = self.y
 
-        self.hoehe = bild.height()
-        self.breite = bild.width()
+        bilddatei = Konst.GRAFIK_SPIELER
+        self.bild = tkinter.PhotoImage(file=bilddatei)
 
-        self.bild = bild
+        self.hoehe = self.bild.height()
+        self.breite = self.bild.width()
+
         self.zeichnung = None
 
-    def aktualisiere(self, malflaeche):
+    def aktualisiere(self, maluntergrund):
         if(self.zeichnung == None):
-            self.zeichnung = malflaeche.create_image(self.x, self.y, 
+            self.zeichnung = maluntergrund.create_image(self.x, self.y, 
                                                      image=self.bild)
         else:
-            malflaeche.move(self.zeichnung, self.zielX - self.x,
+            maluntergrund.move(self.zeichnung, self.zielX - self.x,
                                     self.zielY - self.y)
 
             self.x = self.zielX

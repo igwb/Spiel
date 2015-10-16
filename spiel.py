@@ -2,6 +2,7 @@ import tkinter
 import zielObjekt
 import random
 import spieler
+import spielfeld
 import time
 
 class Konst:
@@ -10,37 +11,38 @@ class Konst:
     FENSTER_HOEHE = 400
     FENSTER_BREITE = 600
 
-    SPIELFELD_HOEHE = 250
-    SPIELFELD_BREITE = 600
-    SPIELFELD_FARBE = "#000000"
-
-    SPIELER_GRAFIK = "spieler.png"
     SPIELER_START_X = 60
-    SPIELER_START_Y = SPIELFELD_HOEHE / 2
+    SPIELER_START_Y = spielfeld.Konst.SPIELFELD_HOEHE / 2
 
-    WELLEN_ABSTAND = 0.5
+    WELLEN_ABSTAND = 0.9
     WELLEN_GROESSE_MIN = 1
     WELLEN_GROESSE_MAX = 3
+    WELLEN_START_X = 600
+    WELLEN_START_MIN_Y = 20
+    WELLEN_START_MAX_Y = spielfeld.Konst.SPIELFELD_HOEHE - 20
+    WELLEN_GESCHWINDIGKEIT = 3
 
     #Gewichtung der Zielobjekt-Typen 
-    ZIELOBJEKT_WAHRSCHEINLICHKEITEN = [4, 1]
+    ZIELOBJEKT_WAHRSCHEINLICHKEITEN = [5, 2]
 
     #FPS (frames per second) - Aufrufe der Hauptschleife pro Sekunde
     FPS=40
 
 class spiel:
-    def erzeugeZiele(self, anzahl, minY, maxY):
+    def erzeugeZiele(self, anzahl):
         erzeugteZiele = []
 
         for i in range(anzahl):
-            y = random.randint(minY, maxY)
+            y = random.randint(Konst.WELLEN_START_MIN_Y,
+                               Konst.WELLEN_START_MAX_Y)
 
             liste = []
             for t in range(len(Konst.ZIELOBJEKT_WAHRSCHEINLICHKEITEN)):
                 liste += [str(t)] * Konst.ZIELOBJEKT_WAHRSCHEINLICHKEITEN[t]
             typ = int(random.choice(liste))
 
-            ziel = zielObjekt.zielObjekt(600, y, typ, self.spielfeld)
+            ziel = zielObjekt.zielObjekt(Konst.WELLEN_START_X, y,
+                                         typ, self.spielfeld.maluntergrund)
 
             erzeugteZiele.append(ziel)
         
@@ -74,19 +76,27 @@ class spiel:
             self.spielfenster.after(10, self.hauptschleife)
 
     def zeichne(self):
+
+        self.spielfeld.zeichneHintergrund()
+
+        #Zeichne alle Ziele
         for ziel in self.ziele:
             ziel.aktualisiere()
 
-        self.spielfigur.aktualisiere(self.spielfeld)
+        #Zeichne die Spielfigur
+        self.spielfigur.aktualisiere(self.spielfeld.maluntergrund)
 
     def aktualisiere(self):
+        #Generiere eine neue Welle von Zielen
         if(time.time() - self.letzteWelle > Konst.WELLEN_ABSTAND):
-            groesse = random.randint(Konst.WELLEN_GROESSE_MIN, Konst.WELLEN_GROESSE_MAX)
-            self.erzeugeZiele(groesse, 50, 250)
+            wellen_groesse = random.randint(Konst.WELLEN_GROESSE_MIN,
+                                            Konst.WELLEN_GROESSE_MAX)
+            self.erzeugeZiele(wellen_groesse)
             self.letzteWelle = time.time()
 
+        #Bewege die Ziele
         for ziel in self.ziele:
-            ziel.bewegeDich(4)
+            ziel.bewegeDich(Konst.WELLEN_GESCHWINDIGKEIT)
            
             if((ziel.x <= self.spielfigur.x + self.spielfigur.breite) and 
                (ziel.x >= self.spielfigur.x)):
@@ -95,12 +105,11 @@ class spiel:
                     ziel.valide = False
 
             if(not ziel.valide):
-                self.spielfeld.delete(ziel.zeichnung)
+                self.spielfeld.maluntergrund.delete(ziel.zeichnung)
                 self.ziele.remove(ziel)
 
-
     def mausBewegt(self, ereignis):
-        self.spielfigur.setzePosition(self.spielfigur.zielX, ereignis.y)
+        self.spielfigur.setzePosition(ereignis.x, ereignis.y)
 
     def __init__(self):
         #Erstelle das Programmfenster und lege seine Größe fest.
@@ -109,24 +118,17 @@ class spiel:
         self.spielfenster.geometry(str(Konst.FENSTER_BREITE) + "x" + 
                                    str(Konst.FENSTER_HOEHE))
 
-        #Erstelle das Spielfeld und lege seine Größe fest.
-        self.spielfeld = tkinter.Canvas(width=Konst.SPIELFELD_BREITE,
-                                        height=Konst.SPIELFELD_HOEHE)
+        #Erstelle das Spielfeld
+        self.spielfeld = spielfeld.Spielfeld(self.spielfenster)
+        #self.spielfeld.maluntergrund = self.spielfeld.maluntergrund
 
-        #Zeichne den Spielfeldhintergrund
-        self.spielfeld.create_rectangle(0, 0, Konst.SPIELFELD_BREITE,
-                                        Konst.SPIELFELD_HOEHE,
-                                        fill=Konst.SPIELFELD_FARBE,
-                                        outline="")
-        self.spielfeld.pack()
 
         #Initalisiere die Spielfigur
-        bild = tkinter.PhotoImage(file=Konst.SPIELER_GRAFIK)
         self.spielfigur = spieler.spieler(Konst.SPIELER_START_X, 
-                                          Konst.SPIELER_START_Y, bild)
+                                          Konst.SPIELER_START_Y)
 
         #Lege Eventhandeling die Mausbewegung fest
-        self.spielfeld.bind('<Motion>', self.mausBewegt)
+        self.spielfeld.maluntergrund.bind('<Motion>', self.mausBewegt)
 
         #Starte das Spiel
         self.ziele = []

@@ -97,10 +97,10 @@ class Spiel:
         for ziel in self.ziele:
             ziel.bewegeDich(WELLEN_GESCHWINDIGKEIT)
            
-            if((ziel.x <= self.spielfigur.x + self.spielfigur.breite) and 
-               (ziel.x >= self.spielfigur.x)):
-                if((ziel.y + ziel.hoehe >= self.spielfigur.y) and 
-                   (ziel.y <= self.spielfigur.y + self.spielfigur.hoehe)):
+            if(not((ziel.y + ziel.hoehe < self.spielfigur.y) or 
+               (ziel.y > self.spielfigur.y + self.spielfigur.hoehe) or 
+               (ziel.x + ziel.breite < self.spielfigur.x) or 
+               (ziel.x > self.spielfigur.x + self.spielfigur.breite))):
                     self.statistik.zielGesammelt(ziel)
                     ziel.valide = False
 

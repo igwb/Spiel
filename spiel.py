@@ -6,44 +6,41 @@ import spielfeld
 import time
 import statistik
 
-class Konst:
-    """Beinhaltet wichtige Konstanten"""
 
-    #FPS (frames per second) - Aufrufe der Hauptschleife pro Sekunde
-    FPS=40
+#FPS (frames per second) - Aufrufe der Hauptschleife pro Sekunde
+FPS=40
 
-    FENSTER_HOEHE = 310
-    FENSTER_BREITE = 600
+FENSTER_HOEHE = 310
+FENSTER_BREITE = 600
 
-    SPIELER_START_X = 60
-    SPIELER_START_Y = spielfeld.Konst.SPIELFELD_HOEHE / 2
-    SPIELER_TREIBSTOFFVERBRAUCH = 1.5 / FPS
+SPIELER_START_X = 60
+SPIELER_START_Y = spielfeld.SPIELFELD_HOEHE / 2
+SPIELER_TREIBSTOFFVERBRAUCH = 1.5 / FPS
 
-    WELLEN_ABSTAND = 0.9
-    WELLEN_GROESSE_MIN = 1
-    WELLEN_GROESSE_MAX = 3
-    WELLEN_START_X = 600
-    WELLEN_START_MIN_Y = 20
-    WELLEN_START_MAX_Y = spielfeld.Konst.SPIELFELD_HOEHE - 20
-    WELLEN_GESCHWINDIGKEIT = 3
+WELLEN_ABSTAND = 0.9
+WELLEN_GROESSE_MIN = 1
+WELLEN_GROESSE_MAX = 3
+WELLEN_START_X = 600
+WELLEN_START_MIN_Y = 20
+WELLEN_START_MAX_Y = spielfeld.SPIELFELD_HOEHE - 20
+WELLEN_GESCHWINDIGKEIT = 3
 
-    #Gewichtung der Zielobjekt-Typen 
-    ZIELOBJEKT_WAHRSCHEINLICHKEITEN = [5, 2]
+#Gewichtung der Zielobjekt-Typen 
+ZIELOBJEKT_WAHRSCHEINLICHKEITEN = [5, 2]
 
 class spiel:
     def erzeugeZiele(self, anzahl):
         erzeugteZiele = []
 
         for i in range(anzahl):
-            y = random.randint(Konst.WELLEN_START_MIN_Y,
-                               Konst.WELLEN_START_MAX_Y)
+            y = random.randint(WELLEN_START_MIN_Y, WELLEN_START_MAX_Y)
 
             liste = []
-            for t in range(len(Konst.ZIELOBJEKT_WAHRSCHEINLICHKEITEN)):
-                liste += [str(t)] * Konst.ZIELOBJEKT_WAHRSCHEINLICHKEITEN[t]
+            for t in range(len(ZIELOBJEKT_WAHRSCHEINLICHKEITEN)):
+                liste += [str(t)] * ZIELOBJEKT_WAHRSCHEINLICHKEITEN[t]
             typ = int(random.choice(liste))
 
-            ziel = zielObjekt.zielObjekt(Konst.WELLEN_START_X, y,
+            ziel = zielObjekt.zielObjekt(WELLEN_START_X, y,
                                          typ, self.spielfeld.maluntergrund)
 
             erzeugteZiele.append(ziel)
@@ -66,7 +63,7 @@ class spiel:
         verstrichene_zeit = jetzt - self.letzte_hauptschleife
         self.letzte_hauptschleife = jetzt
 
-        optimale_verstrichene_zeit = 1./Konst.FPS
+        optimale_verstrichene_zeit = 1./FPS
 
         schlafenszeit = int((optimale_verstrichene_zeit - verstrichene_zeit) 
                             * 1000)
@@ -84,28 +81,26 @@ class spiel:
         #Zeichne alle Ziele
         for ziel in self.ziele:
             ziel.aktualisiere()
-
         #Zeichne die Spielfigur
         self.spielfigur.aktualisiere(self.spielfeld.maluntergrund)
-
         #Zeichne die Punktzahl und den vorhandenen Treibstoff
         self.statistik.aktualisiere()
 
     def aktualisiere(self):
 
-        self.statistik.verbraucheTreibstoff(Konst.SPIELER_TREIBSTOFFVERBRAUCH)
+        self.statistik.verbraucheTreibstoff(SPIELER_TREIBSTOFFVERBRAUCH)
         self.statistik.erhoehePunktzahl(0.1)
 
         #Generiere eine neue Welle von Zielen
-        if(time.time() - self.letzteWelle > Konst.WELLEN_ABSTAND):
-            wellen_groesse = random.randint(Konst.WELLEN_GROESSE_MIN,
-                                            Konst.WELLEN_GROESSE_MAX)
+        if(time.time() - self.letzteWelle > WELLEN_ABSTAND):
+            wellen_groesse = random.randint(WELLEN_GROESSE_MIN,
+                                            WELLEN_GROESSE_MAX)
             self.erzeugeZiele(wellen_groesse)
             self.letzteWelle = time.time()
 
         #Bewege die Ziele
         for ziel in self.ziele:
-            ziel.bewegeDich(Konst.WELLEN_GESCHWINDIGKEIT)
+            ziel.bewegeDich(WELLEN_GESCHWINDIGKEIT)
            
             if((ziel.x <= self.spielfigur.x + self.spielfigur.breite) and 
                (ziel.x >= self.spielfigur.x)):
@@ -125,15 +120,14 @@ class spiel:
         #Erstelle das Programmfenster und lege seine Größe fest.
         self.spielfenster = tkinter.Tk()
         self.spielfenster.resizable(width=False, height=False)
-        self.spielfenster.geometry(str(Konst.FENSTER_BREITE) + "x" + 
-                                   str(Konst.FENSTER_HOEHE))
+        self.spielfenster.geometry(str(FENSTER_BREITE) + "x" + 
+                                   str(FENSTER_HOEHE))
         #Erstelle das Spielfeld
         self.spielfeld = spielfeld.Spielfeld()
         #Erstelle die Statistikanzeige
         self.statistik = statistik.Statistik()
         #Initalisiere die Spielfigur
-        self.spielfigur = spieler.spieler(Konst.SPIELER_START_X, 
-                                          Konst.SPIELER_START_Y)
+        self.spielfigur = spieler.spieler(SPIELER_START_X, SPIELER_START_Y)
         #Lege Eventhandeling für die Mausbewegung fest
         self.spielfeld.maluntergrund.bind('<Motion>', self.mausBewegt)
 

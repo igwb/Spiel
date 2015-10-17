@@ -33,9 +33,9 @@ class Statistik:
         self.label_punkte.pack(fill="x")
 
     def zielGesammelt(self, ziel):
-        if(ziel.typ == zielObjekt.Konst.STEIN):
+        if(ziel.typ == zielObjekt.STEIN):
             self.treibstoff -= 1
-        elif(ziel.typ == zielObjekt.Konst.TREIBSTOFF):
+        elif(ziel.typ == zielObjekt.TREIBSTOFF):
             self.treibstoff = min([self.treibstoff + 5, 100])
             self.punkte += 3
 

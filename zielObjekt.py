@@ -2,14 +2,11 @@ import random
 import os
 import tkinter
 
-class Konst:
-    """Beinhaltet wichtige Konstanten"""
+GRAFIKEN_STEIN = ["stein0.png", "stein1.png", "stein2.png"]
+GRAFIK_TREIBSTOFF = ["treibstoff.png"]
 
-    GRAFIKEN_STEIN = ["stein0.png", "stein1.png", "stein2.png"]
-    GRAFIK_TREIBSTOFF = ["treibstoff.png"]
-
-    STEIN = 0
-    TREIBSTOFF = 1
+STEIN = 0
+TREIBSTOFF = 1
 
 class zielObjekt:
     def __init__(self, x, y, typ, maluntergrund):
@@ -27,11 +24,11 @@ class zielObjekt:
         self.zeichnung = None
 
         #Wähle die zu verwendende Grafik entsprechend dem Typ aus
-        if(self.typ == Konst.STEIN):
-            bilddatei = Konst.GRAFIKEN_STEIN[random.randint(0,
-                                               len(Konst.GRAFIKEN_STEIN) - 1)]
-        elif(self.typ == Konst.TREIBSTOFF):
-            bilddatei = Konst.GRAFIK_TREIBSTOFF
+        if(self.typ == STEIN):
+            bilddatei = GRAFIKEN_STEIN[random.randint(0,
+                                                      len(GRAFIKEN_STEIN) - 1)]
+        elif(self.typ == TREIBSTOFF):
+            bilddatei = GRAFIK_TREIBSTOFF
 
         self.bild = tkinter.PhotoImage(file=bilddatei)
 
@@ -40,12 +37,12 @@ class zielObjekt:
 
     def aktualisiere(self):
         if(self.zeichnung == None):
-            self.zeichnung = self.maluntergrund.create_image(self.x,
-                                                             self.y, 
+            self.zeichnung = self.maluntergrund.create_image(self.x, self.y, 
                                                              image=self.bild)
 
-        self.maluntergrund.move(self.zeichnung, self.zielX - self.x,
-                                    self.zielY - self.y)
+        delta_x = self.zielX - self.x
+        delta_y = self.zielY - self.y
+        self.maluntergrund.move(self.zeichnung, delta_x, delta_y)
 
         self.x = self.zielX
         self.y = self.zielY

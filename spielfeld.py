@@ -1,26 +1,21 @@
 import tkinter
 
-class Konst:
-    """Beinhaltet wichtige Konstanten"""
+SPIELFELD_HOEHE = 250
+SPIELFELD_BREITE = 600
+SPIELFELD_HINTERGRUND = "hintergrund2.png"
 
-    SPIELFELD_HOEHE = 250
-    SPIELFELD_BREITE = 600
-    SPIELFELD_HINTERGRUND = "hintergrund2.png"
-
-    HINTERGRUND_GESCHWINDIGKEIT = 1
-
+HINTERGRUND_GESCHWINDIGKEIT = 1
 
 class Spielfeld:
     def __init__(self):
 
         #Erstelle das Spielfeld und lege seine Größe fest.
-        self.maluntergrund = tkinter.Canvas(height=Konst.SPIELFELD_HOEHE)
+        self.maluntergrund = tkinter.Canvas(height=SPIELFELD_HOEHE)
         
         #Nutze die volle Fensterbreite
         self.maluntergrund.pack(fill="x")
 
-        self.hintergrundbild = tkinter.PhotoImage(file=
-                                                  Konst.SPIELFELD_HINTERGRUND)
+        self.hintergrundbild = tkinter.PhotoImage(file=SPIELFELD_HINTERGRUND)
         self.hintergrund_links = None
         self.hintergrund_rechts = None
         self.hintergrund_x = 0
@@ -40,12 +35,12 @@ class Spielfeld:
 
 
 
-        self.hintergrund_x -= Konst.HINTERGRUND_GESCHWINDIGKEIT
+        self.hintergrund_x -= HINTERGRUND_GESCHWINDIGKEIT
         if(self.hintergrund_x <= 0 - self.hintergrundbild.width()):
             self.hintergrund_x += self.hintergrundbild.width()
             delta_x = self.hintergrundbild.width()
         else:
-            delta_x = Konst.HINTERGRUND_GESCHWINDIGKEIT * -1
+            delta_x = HINTERGRUND_GESCHWINDIGKEIT * -1
 
         self.maluntergrund.move(self.hintergrund_links, delta_x, 0)
         self.maluntergrund.move(self.hintergrund_rechts, delta_x, 0)

@@ -14,7 +14,7 @@ FENSTER_HOEHE = 310
 FENSTER_BREITE = 600
 
 SPIELER_START_X = 60
-SPIELER_START_Y = spielfeld.SPIELFELD_HOEHE / 2
+SPIELER_START_Y = spielfeld.HOEHE / 2
 SPIELER_TREIBSTOFFVERBRAUCH = 1.5 / FPS
 
 WELLEN_ABSTAND = 0.9
@@ -22,7 +22,7 @@ WELLEN_GROESSE_MIN = 1
 WELLEN_GROESSE_MAX = 3
 WELLEN_START_X = 600
 WELLEN_START_MIN_Y = 20
-WELLEN_START_MAX_Y = spielfeld.SPIELFELD_HOEHE - 20
+WELLEN_START_MAX_Y = spielfeld.HOEHE - 20
 WELLEN_GESCHWINDIGKEIT = 3
 
 #Gewichtung der Zielobjekt-Typen 
@@ -44,12 +44,14 @@ class Spiel:
                                           SPIELER_START_X, SPIELER_START_Y)
         #Lege Eventhandeling für die Mausbewegung fest
         self.spielfeld.maluntergrund.bind('<Motion>', self.mausBewegt)
-
+        self.spielfeld.maluntergrund.bind_all('<Key>', self.tasteGedrueckt)
         #Starte das Spiel
         self.ziele = []
         self.start()
 
     def start(self):
+        self.spiel_laeuft = True
+
         self.letzteWelle = time.time()
         self.startzeitpunkt = time.time()
         self.letzte_hauptschleife = time.time()
@@ -58,6 +60,10 @@ class Spiel:
         self.spielfenster.mainloop()
 
     def hauptschleife(self):
+        if(not self.spiel_laeuft):
+            self.spielfenster.after(10, self.hauptschleife)
+            return
+
         self.aktualisiere()
         self.zeichne()
 
@@ -131,6 +137,23 @@ class Spiel:
         
         self.ziele += erzeugteZiele
     
+    def pausiere(self):
+        self.spiel_laeuft = not self.spiel_laeuft
+
+        if(self.spiel_laeuft):
+            self.spielfeld.maluntergrund.delete(self.zeichnung_pause)
+        else:
+            self.zeichnung_pause = self.spielfeld.maluntergrund.create_text(
+                                                    FENSTER_BREITE / 2,
+                                                    spielfeld.HOEHE / 2,
+                                                    text="PAUSE",
+                                                    font=("Arial", 28),
+                                                    fill="#ff0000")
+
+    def tasteGedrueckt(self, ereignis):
+        if(ereignis.char.lower() == "p"):
+            self.pausiere()
+
     def mausBewegt(self, ereignis):
         self.spielfigur.setzePosition(ereignis.x, ereignis.y)
 

@@ -1,8 +1,7 @@
 import tkinter
 
-SPIELFELD_HOEHE = 250
-SPIELFELD_BREITE = 600
-SPIELFELD_HINTERGRUND = "hintergrund2.png"
+HOEHE = 250
+HINTERGRUND = "hintergrund2.png"
 
 HINTERGRUND_GESCHWINDIGKEIT = 1
 
@@ -14,11 +13,11 @@ class Spielfeld:
         self.hintergrund_x = 0
 
         #Erstelle das Spielfeld und lege seine Größe fest.
-        self.maluntergrund = tkinter.Canvas(height=SPIELFELD_HOEHE)
+        self.maluntergrund = tkinter.Canvas(height=HOEHE)
         #Nutze die volle Fensterbreite
         self.maluntergrund.pack(fill="x")
         #Lade das Hintergrundbild
-        self.hintergrundbild = tkinter.PhotoImage(file=SPIELFELD_HINTERGRUND)
+        self.hintergrundbild = tkinter.PhotoImage(file=HINTERGRUND)
 
 
     def zeichneHintergrund(self):

@@ -11,13 +11,13 @@ class Konst:
 
 
 class Spielfeld:
-    def __init__(self, spielfenster):
+    def __init__(self):
 
         #Erstelle das Spielfeld und lege seine Größe fest.
-        self.maluntergrund = tkinter.Canvas(width=Konst.SPIELFELD_BREITE,
-                                            height=Konst.SPIELFELD_HOEHE)
+        self.maluntergrund = tkinter.Canvas(height=Konst.SPIELFELD_HOEHE)
         
-        self.maluntergrund.pack()
+        #Nutze die volle Fensterbreite
+        self.maluntergrund.pack(fill="x")
 
         self.hintergrundbild = tkinter.PhotoImage(file=
                                                   Konst.SPIELFELD_HINTERGRUND)

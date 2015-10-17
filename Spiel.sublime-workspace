@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"sp",
+				"spielfenster〔variable〕"
+			],
+			[
+				"hint",
+				"hintergrund_x〔variable〕"
+			],
+			[
+				"hin",
+				"hintergrund_x〔variable〕"
+			],
+			[
+				"h",
+				"hintergrund_rechts〔variable〕"
+			],
+			[
+				"hinterg",
+				"hintergrund_links〔variable〕"
+			],
+			[
+				"Spi",
+				"Spielfeld"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
 				"WELLE",
 				"WELLEN_GESCHWINDIGKEIT"
 			],
@@ -14,10 +42,6 @@
 			[
 				"rand",
 				"random〔module〕"
-			],
-			[
-				"sp",
-				"spielfeld〔variable〕"
 			],
 			[
 				"ziel",
@@ -247,7 +271,7 @@
 			"file": "spiel.py",
 			"settings":
 			{
-				"buffer_size": 4666,
+				"buffer_size": 4550,
 				"line_ending": "Windows"
 			}
 		},
@@ -255,8 +279,26 @@
 			"file": "spieler.py",
 			"settings":
 			{
-				"buffer_size": 1025,
+				"buffer_size": 1034,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "spielfeld.py",
+			"settings":
+			{
+				"buffer_size": 1940,
+				"line_ending": "Windows",
+				"name": "class Spielfeld:"
+			}
+		},
+		{
+			"file": "statistik.py",
+			"settings":
+			{
+				"buffer_size": 1079,
+				"line_ending": "Windows",
+				"name": "class Konst():"
 			}
 		},
 		{
@@ -341,6 +383,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Konst.HINTERGRUND_GESCHWINDIGKEIT * -1",
+			"WELLEN",
+			"maluntergrund",
+			"spielfeld",
+			"self.spielfeld",
+			"malflaeche",
+			"SPIELFELD",
+			"spielfeld",
 			"bild",
 			"SPIELER_GRAFIK",
 			"Treibstoff",
@@ -422,15 +472,15 @@
 					"file": "spiel.py",
 					"settings":
 					{
-						"buffer_size": 4666,
+						"buffer_size": 4550,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2223,
-								2223
+								46,
+								46
 							]
 						],
 						"settings":
@@ -445,31 +495,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 810.0,
+						"translation.y": 720.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
 					"buffer": 1,
 					"file": "spieler.py",
 					"settings":
 					{
-						"buffer_size": 1025,
+						"buffer_size": 1034,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								413,
-								379
+								775,
+								887
 							]
 						],
 						"settings":
@@ -484,9 +528,71 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
 				{
 					"buffer": 2,
+					"file": "spielfeld.py",
+					"settings":
+					{
+						"buffer_size": 1940,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								248,
+								248
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"auto_name": "class Spielfeld:",
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "statistik.py",
+					"settings":
+					{
+						"buffer_size": 1079,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								519,
+								519
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"auto_name": "class Konst():",
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
 					"file": "zielObjekt.py",
 					"settings":
 					{
@@ -497,8 +603,8 @@
 						"selection":
 						[
 							[
-								913,
-								913
+								235,
+								235
 							]
 						],
 						"settings":

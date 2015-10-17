@@ -4,15 +4,20 @@ import random
 import spieler
 import spielfeld
 import time
+import statistik
 
 class Konst:
     """Beinhaltet wichtige Konstanten"""
 
-    FENSTER_HOEHE = 400
+    #FPS (frames per second) - Aufrufe der Hauptschleife pro Sekunde
+    FPS=40
+
+    FENSTER_HOEHE = 310
     FENSTER_BREITE = 600
 
     SPIELER_START_X = 60
     SPIELER_START_Y = spielfeld.Konst.SPIELFELD_HOEHE / 2
+    SPIELER_TREIBSTOFFVERBRAUCH = 1.5 / FPS
 
     WELLEN_ABSTAND = 0.9
     WELLEN_GROESSE_MIN = 1
@@ -24,9 +29,6 @@ class Konst:
 
     #Gewichtung der Zielobjekt-Typen 
     ZIELOBJEKT_WAHRSCHEINLICHKEITEN = [5, 2]
-
-    #FPS (frames per second) - Aufrufe der Hauptschleife pro Sekunde
-    FPS=40
 
 class spiel:
     def erzeugeZiele(self, anzahl):
@@ -86,7 +88,14 @@ class spiel:
         #Zeichne die Spielfigur
         self.spielfigur.aktualisiere(self.spielfeld.maluntergrund)
 
+        #Zeichne die Punktzahl und den vorhandenen Treibstoff
+        self.statistik.aktualisiere()
+
     def aktualisiere(self):
+
+        self.statistik.verbraucheTreibstoff(Konst.SPIELER_TREIBSTOFFVERBRAUCH)
+        self.statistik.erhoehePunktzahl(0.1)
+
         #Generiere eine neue Welle von Zielen
         if(time.time() - self.letzteWelle > Konst.WELLEN_ABSTAND):
             wellen_groesse = random.randint(Konst.WELLEN_GROESSE_MIN,
@@ -102,6 +111,7 @@ class spiel:
                (ziel.x >= self.spielfigur.x)):
                 if((ziel.y + ziel.hoehe >= self.spielfigur.y) and 
                    (ziel.y <= self.spielfigur.y + self.spielfigur.hoehe)):
+                    self.statistik.zielGesammelt(ziel)
                     ziel.valide = False
 
             if(not ziel.valide):
@@ -117,17 +127,14 @@ class spiel:
         self.spielfenster.resizable(width=False, height=False)
         self.spielfenster.geometry(str(Konst.FENSTER_BREITE) + "x" + 
                                    str(Konst.FENSTER_HOEHE))
-
         #Erstelle das Spielfeld
-        self.spielfeld = spielfeld.Spielfeld(self.spielfenster)
-        #self.spielfeld.maluntergrund = self.spielfeld.maluntergrund
-
-
+        self.spielfeld = spielfeld.Spielfeld()
+        #Erstelle die Statistikanzeige
+        self.statistik = statistik.Statistik()
         #Initalisiere die Spielfigur
         self.spielfigur = spieler.spieler(Konst.SPIELER_START_X, 
                                           Konst.SPIELER_START_Y)
-
-        #Lege Eventhandeling die Mausbewegung fest
+        #Lege Eventhandeling für die Mausbewegung fest
         self.spielfeld.maluntergrund.bind('<Motion>', self.mausBewegt)
 
         #Starte das Spiel

@@ -8,17 +8,18 @@ HINTERGRUND_GESCHWINDIGKEIT = 1
 
 class Spielfeld:
     def __init__(self):
-
-        #Erstelle das Spielfeld und lege seine Größe fest.
-        self.maluntergrund = tkinter.Canvas(height=SPIELFELD_HOEHE)
-        
-        #Nutze die volle Fensterbreite
-        self.maluntergrund.pack(fill="x")
-
-        self.hintergrundbild = tkinter.PhotoImage(file=SPIELFELD_HINTERGRUND)
+        #Initialisiere Variablen
         self.hintergrund_links = None
         self.hintergrund_rechts = None
         self.hintergrund_x = 0
+
+        #Erstelle das Spielfeld und lege seine Größe fest.
+        self.maluntergrund = tkinter.Canvas(height=SPIELFELD_HOEHE)
+        #Nutze die volle Fensterbreite
+        self.maluntergrund.pack(fill="x")
+        #Lade das Hintergrundbild
+        self.hintergrundbild = tkinter.PhotoImage(file=SPIELFELD_HINTERGRUND)
+
 
     def zeichneHintergrund(self):
         if(self.hintergrund_links == None):
@@ -32,8 +33,6 @@ class Spielfeld:
                                         self.hintergrundbild.width(),
                                         0, image=self.hintergrundbild,
                                         anchor="nw")
-
-
 
         self.hintergrund_x -= HINTERGRUND_GESCHWINDIGKEIT
         if(self.hintergrund_x <= 0 - self.hintergrundbild.width()):

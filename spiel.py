@@ -28,24 +28,26 @@ WELLEN_GESCHWINDIGKEIT = 3
 #Gewichtung der Zielobjekt-Typen 
 ZIELOBJEKT_WAHRSCHEINLICHKEITEN = [5, 2]
 
-class spiel:
-    def erzeugeZiele(self, anzahl):
-        erzeugteZiele = []
+class Spiel:
+    def __init__(self):
+        #Erstelle das Programmfenster und lege seine Größe fest.
+        self.spielfenster = tkinter.Tk()
+        self.spielfenster.resizable(width=False, height=False)
+        self.spielfenster.geometry(str(FENSTER_BREITE) + "x" + 
+                                   str(FENSTER_HOEHE))
+        #Erstelle das Spielfeld
+        self.spielfeld = spielfeld.Spielfeld()
+        #Erstelle die Statistikanzeige
+        self.statistik = statistik.Statistik()
+        #Initalisiere die Spielfigur
+        self.spielfigur = spieler.spieler(self.spielfeld.maluntergrund,
+                                          SPIELER_START_X, SPIELER_START_Y)
+        #Lege Eventhandeling für die Mausbewegung fest
+        self.spielfeld.maluntergrund.bind('<Motion>', self.mausBewegt)
 
-        for i in range(anzahl):
-            y = random.randint(WELLEN_START_MIN_Y, WELLEN_START_MAX_Y)
-
-            liste = []
-            for t in range(len(ZIELOBJEKT_WAHRSCHEINLICHKEITEN)):
-                liste += [str(t)] * ZIELOBJEKT_WAHRSCHEINLICHKEITEN[t]
-            typ = int(random.choice(liste))
-
-            ziel = zielObjekt.zielObjekt(WELLEN_START_X, y,
-                                         typ, self.spielfeld.maluntergrund)
-
-            erzeugteZiele.append(ziel)
-        
-        self.ziele += erzeugteZiele
+        #Starte das Spiel
+        self.ziele = []
+        self.start()
 
     def start(self):
         self.letzteWelle = time.time()
@@ -74,20 +76,7 @@ class spiel:
             print(str(schlafenszeit * -1) + "ms zu langsam!")
             self.spielfenster.after(10, self.hauptschleife)
 
-    def zeichne(self):
-
-        self.spielfeld.zeichneHintergrund()
-
-        #Zeichne alle Ziele
-        for ziel in self.ziele:
-            ziel.aktualisiere()
-        #Zeichne die Spielfigur
-        self.spielfigur.aktualisiere(self.spielfeld.maluntergrund)
-        #Zeichne die Punktzahl und den vorhandenen Treibstoff
-        self.statistik.aktualisiere()
-
     def aktualisiere(self):
-
         self.statistik.verbraucheTreibstoff(SPIELER_TREIBSTOFFVERBRAUCH)
         self.statistik.erhoehePunktzahl(0.1)
 
@@ -113,27 +102,37 @@ class spiel:
                 self.spielfeld.maluntergrund.delete(ziel.zeichnung)
                 self.ziele.remove(ziel)
 
+    def zeichne(self):
+        self.spielfeld.zeichneHintergrund()
+
+        #Zeichne alle Ziele
+        for ziel in self.ziele:
+            ziel.aktualisiere()
+        #Zeichne die Spielfigur
+        self.spielfigur.aktualisiere()
+        #Zeichne die Punktzahl und den vorhandenen Treibstoff
+        self.statistik.aktualisiere()
+
+    def erzeugeZiele(self, anzahl):
+        erzeugteZiele = []
+
+        for i in range(anzahl):
+            y = random.randint(WELLEN_START_MIN_Y, WELLEN_START_MAX_Y)
+
+            liste = []
+            for t in range(len(ZIELOBJEKT_WAHRSCHEINLICHKEITEN)):
+                liste += [str(t)] * ZIELOBJEKT_WAHRSCHEINLICHKEITEN[t]
+            typ = int(random.choice(liste))
+
+            ziel = zielObjekt.zielObjekt(self.spielfeld.maluntergrund,
+                                         WELLEN_START_X, y, typ)
+
+            erzeugteZiele.append(ziel)
+        
+        self.ziele += erzeugteZiele
+    
     def mausBewegt(self, ereignis):
         self.spielfigur.setzePosition(ereignis.x, ereignis.y)
 
-    def __init__(self):
-        #Erstelle das Programmfenster und lege seine Größe fest.
-        self.spielfenster = tkinter.Tk()
-        self.spielfenster.resizable(width=False, height=False)
-        self.spielfenster.geometry(str(FENSTER_BREITE) + "x" + 
-                                   str(FENSTER_HOEHE))
-        #Erstelle das Spielfeld
-        self.spielfeld = spielfeld.Spielfeld()
-        #Erstelle die Statistikanzeige
-        self.statistik = statistik.Statistik()
-        #Initalisiere die Spielfigur
-        self.spielfigur = spieler.spieler(SPIELER_START_X, SPIELER_START_Y)
-        #Lege Eventhandeling für die Mausbewegung fest
-        self.spielfeld.maluntergrund.bind('<Motion>', self.mausBewegt)
-
-        #Starte das Spiel
-        self.ziele = []
-        self.start()
-
 if(__name__=="__main__"):
-    spiel()
+    Spiel()

@@ -3,25 +3,21 @@ import os
 import tkinter
 
 GRAFIKEN_STEIN = ["stein0.png", "stein1.png", "stein2.png"]
-GRAFIK_TREIBSTOFF = ["treibstoff.png"]
+GRAFIK_TREIBSTOFF = "treibstoff.png"
 
 STEIN = 0
 TREIBSTOFF = 1
 
 class zielObjekt:
-    def __init__(self, x, y, typ, maluntergrund):
+    def __init__(self, maluntergrund, x, y, typ, ):
+        #Initialisiere Variablen 
+        self.maluntergrund = maluntergrund
         self.x = x
         self.y = y
-
-        #Lege die Position fest, an die das Objekt bewegt werden soll
-        self.zielX = self.x
-        self.zielY = self.y
-
-        self.valide = True
         self.typ = typ
 
-        self.maluntergrund = maluntergrund
-        self.zeichnung = None
+        self.valide = True
+        self.delta_x = 0
 
         #Wähle die zu verwendende Grafik entsprechend dem Typ aus
         if(self.typ == STEIN):
@@ -30,26 +26,21 @@ class zielObjekt:
         elif(self.typ == TREIBSTOFF):
             bilddatei = GRAFIK_TREIBSTOFF
 
-        self.bild = tkinter.PhotoImage(file=bilddatei)
+        self.grafik = tkinter.PhotoImage(file=bilddatei)
+        self.zeichnung = self.maluntergrund.create_image(self.x, self.y, 
+                                                         image=self.grafik)
 
-        self.hoehe = self.bild.height()
-        self.breite = self.bild.width()
+        self.hoehe = self.grafik.height()
+        self.breite = self.grafik.width()
 
     def aktualisiere(self):
-        if(self.zeichnung == None):
-            self.zeichnung = self.maluntergrund.create_image(self.x, self.y, 
-                                                             image=self.bild)
-
-        delta_x = self.zielX - self.x
-        delta_y = self.zielY - self.y
-        self.maluntergrund.move(self.zeichnung, delta_x, delta_y)
-
-        self.x = self.zielX
-        self.y = self.zielY
+        self.maluntergrund.move(self.zeichnung, self.delta_x, 0)
+        self.x += self.delta_x
+        self.delta_x = 0
 
     def bewegeDich(self, distanz):
         #Verschiebe die x-Koordinate um distanz nach links und makriere das
         #Objekt als ungültig, falls es das Spielfeld verlässt
-        self.zielX -= distanz
-        if(self.zielX <= 0):
+        self.delta_x -= distanz
+        if(self.x + self.delta_x <= 0):
             self.valide = False

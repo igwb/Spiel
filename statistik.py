@@ -53,6 +53,6 @@ class Statistik:
                                                     (self.treibstoff / 100)),
                                                 TREIBSTOFFANZEIGE_HOEHE,
                                                 fill=TREIBSTOFFANZEIGE_FARBE,
-                                                outline="#000000")
+                                                outline="")
         #Aktualisiere die Punkteanzeige, das Neuzeichnen übernimmt tkinter.
         self.text_punkte.set(str(int(self.punkte)))

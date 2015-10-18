@@ -13,8 +13,7 @@ FPS=40
 FENSTER_HOEHE = 310
 FENSTER_BREITE = 600
 
-SPIELER_START_X = 60
-SPIELER_START_Y = spielfeld.HOEHE / 2
+
 SPIELER_TREIBSTOFFVERBRAUCH = 1.5 / FPS
 
 WELLEN_ABSTAND = 0.9
@@ -40,13 +39,14 @@ class Spiel:
         #Erstelle die Statistikanzeige
         self.statistik = statistik.Statistik()
         #Initalisiere die Spielfigur
-        self.spielfigur = spieler.spieler(self.spielfeld.maluntergrund,
-                                          SPIELER_START_X, SPIELER_START_Y)
-        #Lege Eventhandeling für die Mausbewegung fest
+        self.spielfigur = spieler.spieler(self.spielfeld.maluntergrund)
+        #Lege Eventhandeling fest
         self.spielfeld.maluntergrund.bind('<Motion>', self.mausBewegt)
+        self.spielfeld.maluntergrund.bind("<Button-1>", self.mausGeklickt)
         self.spielfeld.maluntergrund.bind_all('<Key>', self.tasteGedrueckt)
         #Starte das Spiel
         self.ziele = []
+        self.zeichnung_pause = None
         self.start()
 
     def start(self):
@@ -58,6 +58,19 @@ class Spiel:
 
         self.hauptschleife()
         self.spielfenster.mainloop()
+
+    def neuStart(self):
+        self.setzeSpielLaeuft(False)
+
+        self.letzteWelle = time.time()
+        self.startzeitpunkt = time.time()
+        self.letzte_hauptschleife = time.time()
+
+        self.spielfeld.maluntergrund.delete("ALL")
+        self.ziele = []
+        self.statistik.reset()
+        self.spielfigur.reset()
+        self.zeichne()
 
     def hauptschleife(self):
         if(not self.spiel_laeuft):
@@ -83,6 +96,10 @@ class Spiel:
             self.spielfenster.after(10, self.hauptschleife)
 
     def aktualisiere(self):
+        if(self.statistik.treibstoff <= 0):
+            self.neuStart()
+            return
+
         self.statistik.verbraucheTreibstoff(SPIELER_TREIBSTOFFVERBRAUCH)
         self.statistik.erhoehePunktzahl(0.1)
 
@@ -97,16 +114,26 @@ class Spiel:
         for ziel in self.ziele:
             ziel.bewegeDich(WELLEN_GESCHWINDIGKEIT)
            
-            if(not((ziel.y + ziel.hoehe < self.spielfigur.y) or 
-               (ziel.y > self.spielfigur.y + self.spielfigur.hoehe) or 
-               (ziel.x + ziel.breite < self.spielfigur.x) or 
-               (ziel.x > self.spielfigur.x + self.spielfigur.breite))):
+            if(self.istKollidierend(ziel.x, ziel.y, ziel.hoehe, ziel.breite,
+                               self.spielfigur.x, self.spielfigur.y,
+                               self.spielfigur.hoehe, self.spielfigur.breite)):
                     self.statistik.zielGesammelt(ziel)
                     ziel.valide = False
 
             if(not ziel.valide):
                 self.spielfeld.maluntergrund.delete(ziel.zeichnung)
                 self.ziele.remove(ziel)
+
+    def istKollidierend(self, x1, y1, hoehe1, breite1, x2, y2, hoehe2, breite2):
+        if (y1 + hoehe1 < y2):
+            return False
+        if(y1 > y2 + hoehe2):
+            return False
+        if (x1 + breite1 < x2):
+            return False
+        if(x1 > x2 + breite2):
+            return False 
+        return True
 
     def zeichne(self):
         self.spielfeld.zeichneHintergrund()
@@ -137,25 +164,36 @@ class Spiel:
         
         self.ziele += erzeugteZiele
     
-    def pausiere(self):
-        self.spiel_laeuft = not self.spiel_laeuft
+    def setzeSpielLaeuft(self, zustand):
+        self.spiel_laeuft = zustand
 
         if(self.spiel_laeuft):
             self.spielfeld.maluntergrund.delete(self.zeichnung_pause)
+            self.zeichnung_pause = None
         else:
+            if(self.zeichnung_pause != None):
+                return
             self.zeichnung_pause = self.spielfeld.maluntergrund.create_text(
                                                     FENSTER_BREITE / 2,
                                                     spielfeld.HOEHE / 2,
                                                     text="PAUSE",
                                                     font=("Arial", 28),
-                                                    fill="#ff0000")
+                                                    fill="#ffffff")
 
     def tasteGedrueckt(self, ereignis):
         if(ereignis.char.lower() == "p"):
-            self.pausiere()
+            self.setzeSpielLaeuft(False)
+        if(ereignis.char.lower() == "r"):
+            self.neuStart()
 
     def mausBewegt(self, ereignis):
         self.spielfigur.setzePosition(ereignis.x, ereignis.y)
+
+    def mausGeklickt(self, ereignis):
+        if(self.istKollidierend(ereignis.x, ereignis.y, 1, 1,
+                           self.spielfigur.x, self.spielfigur.y,
+                           self.spielfigur.hoehe, self.spielfigur.breite)):
+            self.setzeSpielLaeuft(not self.spiel_laeuft)
 
 if(__name__=="__main__"):
     Spiel()

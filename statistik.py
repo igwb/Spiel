@@ -14,9 +14,7 @@ class Statistik:
     def __init__(self):
         #Initialisiere Variablen
         self.zeichnung_treibstoff = None
-        self.punkte = 0
-        self.treibstoff = 100
-
+        self.reset()
         #Erstelle die Treibstoffanzeige
         self.maluntergrund = tkinter.Canvas(width=TREIBSTOFFANZEIGE_BREITE,
                                             height=TREIBSTOFFANZEIGE_HOEHE)
@@ -31,6 +29,10 @@ class Statistik:
                                           font=("Arial", 20))
         #Nutze die volle Fensterbreite
         self.label_punkte.pack(fill="x")
+
+    def reset(self):
+        self.punkte = 0
+        self.treibstoff = 20
 
     def zielGesammelt(self, ziel):
         if(ziel.typ == zielObjekt.STEIN):

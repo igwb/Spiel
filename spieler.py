@@ -1,16 +1,19 @@
 import tkinter
+import spielfeld
 
-GRAFIK_SPIELER = "spieler.png"
+GRAFIK_SPIELER = "spieler2.png"
+START_X = 60
+START_Y = spielfeld.HOEHE / 2
 
 class spieler:
-    def __init__(self, maluntergrund, x, y):
+    def __init__(self, maluntergrund):
         #Initialisiere Variablen
         self.maluntergrund = maluntergrund
-        self.x = x
-        self.y = y
-        #Lege die Position fest, an die das Objekt bewegt werden soll
-        self.zielX = self.x
-        self.zielY = self.y
+        self.reset()
+
+        self.x = START_X
+        self.y = START_Y
+
 
         #Lade die Grafik
         bilddatei = GRAFIK_SPIELER
@@ -19,6 +22,13 @@ class spieler:
 
         self.hoehe = self.grafik.height()
         self.breite = self.grafik.width()
+
+    def reset(self):
+        
+
+        #Lege die Position fest, an die das Objekt bewegt werden soll
+        self.zielX = START_X
+        self.zielY = START_Y
 
     def aktualisiere(self):
         if(self.zeichnung == None):

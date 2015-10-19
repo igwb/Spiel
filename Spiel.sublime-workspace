@@ -4,6 +4,42 @@
 		"selected_items":
 		[
 			[
+				"P",
+				"PUNKTE_PRO_FRAME"
+			],
+			[
+				"STA",
+				"START_TREIBSTOFF"
+			],
+			[
+				"abg",
+				"abgrenzungen1"
+			],
+			[
+				"St",
+				"START_Y"
+			],
+			[
+				"setze",
+				"setzeSpielLaeuft"
+			],
+			[
+				"spe",
+				"spielfigur"
+			],
+			[
+				"spiel",
+				"spielfigur"
+			],
+			[
+				"PUNKTE",
+				"PUNKTEANZEIGE_TEXTFARBE"
+			],
+			[
+				"TREIB",
+				"TREIBSTOFFANZEIGE_BREITE"
+			],
+			[
 				"sp",
 				"spielfenster〔variable〕"
 			],
@@ -140,14 +176,6 @@
 				"width"
 			],
 			[
-				"spiel",
-				"spielfeld"
-			],
-			[
-				"spe",
-				"spielfeld"
-			],
-			[
 				"sch",
 				"schlafenszeit"
 			],
@@ -271,7 +299,7 @@
 			"file": "spiel.py",
 			"settings":
 			{
-				"buffer_size": 4550,
+				"buffer_size": 8428,
 				"line_ending": "Windows"
 			}
 		},
@@ -279,7 +307,15 @@
 			"file": "spieler.py",
 			"settings":
 			{
-				"buffer_size": 1034,
+				"buffer_size": 1765,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "zielObjekt.py",
+			"settings":
+			{
+				"buffer_size": 2040,
 				"line_ending": "Windows"
 			}
 		},
@@ -287,7 +323,7 @@
 			"file": "spielfeld.py",
 			"settings":
 			{
-				"buffer_size": 1940,
+				"buffer_size": 1974,
 				"line_ending": "Windows",
 				"name": "class Spielfeld:"
 			}
@@ -296,26 +332,22 @@
 			"file": "statistik.py",
 			"settings":
 			{
-				"buffer_size": 1079,
+				"buffer_size": 2856,
 				"line_ending": "Windows",
 				"name": "class Konst():"
-			}
-		},
-		{
-			"file": "zielObjekt.py",
-			"settings":
-			{
-				"buffer_size": 1801,
-				"line_ending": "Windows"
 			}
 		}
 	],
 	"build_system": "Packages/Python/Python.sublime-build",
 	"command_palette":
 	{
-		"height": 104.0,
+		"height": 265.0,
 		"selected_items":
 		[
+			[
+				"rem",
+				"Package Control: Remove Package"
+			],
 			[
 				"remov",
 				"Package Control: Remove Package"
@@ -354,18 +386,20 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Bodo Beyer/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/Bodo Beyer/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/F/BodoBeyer/Desktop/Spiel/__init__.py",
+		"/F/BodoBeyer/Desktop/test.py",
 		"/F/BodoBeyer/Desktop/Spiel/statistik.py",
 		"/F/BodoBeyer/Desktop/Spiel/test.py",
 		"/F/BodoBeyer/Desktop/Spiel/spieler.py",
-		"/C/Users/Bodo Beyer/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/Bodo Beyer/AppData/Roaming/Sublime Text 2/Packages/Pylinter/Pylinter.sublime-settings",
 		"/F/BodoBeyer/Desktop/hello.py",
 		"/F/BodoBeyer/Desktop/Spiel/zeichenManager.py",
 		"/F/BodoBeyer/Desktop/Spiel/main.py",
 		"/F/BodoBeyer/Desktop/Spiel/__init__",
 		"/C/Users/Bodo Beyer/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/C/Users/Bodo Beyer/AppData/Roaming/Sublime Text 2/Packages/User/Python.sublime-settings",
-		"/F/BodoBeyer/Desktop/test.py"
+		"/C/Users/Bodo Beyer/AppData/Roaming/Sublime Text 2/Packages/User/Python.sublime-settings"
 	],
 	"find":
 	{
@@ -383,6 +417,30 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"erzeugeZiele",
+			"neuStart",
+			"#",
+			"spielfenster",
+			"spielfeld",
+			"Spielfeld",
+			"spielfeld",
+			"maluntergrund",
+			"abgrenzungen",
+			"pausiere",
+			"not",
+			"and",
+			"SPIELFELD_HINTERGRUND",
+			"SPIELFELD_BREITE",
+			"SPIELFELD_HOEHE",
+			"bild",
+			"deltaY",
+			"deltaX",
+			"Konst.",
+			"SPIELER_VERBRAUCH",
+			"test",
+			",\n",
+			"TREIBSTOFF_ANZEIGE_HOEHE",
+			"zeichnung_punkte",
 			"Konst.HINTERGRUND_GESCHWINDIGKEIT * -1",
 			"WELLEN",
 			"maluntergrund",
@@ -453,6 +511,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"erzeugeWelle",
+			"neustart",
+			"# ",
+			"leinwand",
 			"    "
 		],
 		"reverse": false,
@@ -472,15 +534,15 @@
 					"file": "spiel.py",
 					"settings":
 					{
-						"buffer_size": 4550,
+						"buffer_size": 8428,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								46,
-								46
+								8389,
+								8389
 							]
 						],
 						"settings":
@@ -495,7 +557,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 720.0,
+						"translation.y": 2565.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -505,15 +567,15 @@
 					"file": "spieler.py",
 					"settings":
 					{
-						"buffer_size": 1034,
+						"buffer_size": 1765,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								775,
-								887
+								823,
+								823
 							]
 						],
 						"settings":
@@ -532,79 +594,23 @@
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 2,
-					"file": "spielfeld.py",
-					"settings":
-					{
-						"buffer_size": 1940,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								248,
-								248
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"auto_name": "class Spielfeld:",
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "statistik.py",
-					"settings":
-					{
-						"buffer_size": 1079,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								519,
-								519
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"auto_name": "class Konst():",
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "zielObjekt.py",
 					"settings":
 					{
-						"buffer_size": 1801,
+						"buffer_size": 2040,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								235,
-								235
+								737,
+								737
 							]
 						],
 						"settings":
@@ -620,6 +626,66 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "spielfeld.py",
+					"settings":
+					{
+						"buffer_size": 1974,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1424,
+								1424
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"auto_name": "class Spielfeld:",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "statistik.py",
+					"settings":
+					{
+						"buffer_size": 2856,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1725,
+								1725
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"auto_name": "class Konst():",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

@@ -6,7 +6,6 @@ import spieler
 import spielfeld
 import statistik
 
-
 # FPS (frames per second) - Aufrufe der Hauptschleife pro Sekunde
 FPS = 40
 
@@ -126,18 +125,6 @@ class Spiel:
                     self.statistik.zielGesammelt(ziel)
                     ziel.valide = False
 
-    def istKollidierend(self, abgrenzung1, abgrenzung2):
-        """Ueberprueft ob zwei Objekte miteinander Kollidieren."""
-        if (abgrenzung1['y'] + abgrenzung1['hoehe']  < abgrenzung2['y']):
-            return False
-        if(abgrenzung1['y'] > abgrenzung2['y'] + abgrenzung2['hoehe']):
-            return False
-        if (abgrenzung1['x'] + abgrenzung1['breite'] < abgrenzung2['x']):
-            return False
-        if(abgrenzung1['x'] > abgrenzung2['x'] + abgrenzung2['breite']):
-            return False 
-        return True
-
     def zeichne(self):
         """Zeichnet das Spiel."""
         #Zeichne den Spielfeldhintergrund.
@@ -192,6 +179,18 @@ class Spiel:
                                                     text="PAUSE",
                                                     font=("Arial", 28),
                                                     fill="#ffffff")
+
+    def istKollidierend(self, abgrenzung1, abgrenzung2):
+        """Ueberprueft ob zwei Objekte miteinander Kollidieren."""
+        if (abgrenzung1['y'] + abgrenzung1['hoehe']  < abgrenzung2['y']):
+            return False
+        if(abgrenzung1['y'] > abgrenzung2['y'] + abgrenzung2['hoehe']):
+            return False
+        if (abgrenzung1['x'] + abgrenzung1['breite'] < abgrenzung2['x']):
+            return False
+        if(abgrenzung1['x'] > abgrenzung2['x'] + abgrenzung2['breite']):
+            return False 
+        return True
 
     def tasteGedrueckt(self, ereignis):
         if(ereignis.char.lower() == "p"):
